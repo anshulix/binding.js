@@ -1,0 +1,57 @@
+{
+    "searchBar": {
+        "event_type": "click",
+        "event_method": "restCall",
+        "event_url": "http: //getSearchParam/: reqid/: xyz",
+        "url_variables": {
+            "reqid": "requestKey",
+            "xyz": "abc"
+        },
+        "request_type": "POST",
+        "request_model": "myModels.searchParam",
+        "response_model": "myModels.result",
+        "response_type": [
+            {
+                "type": "dropdown",
+                "response_value": "myModels.result.options",
+                "kind": "isArray"
+            },
+            {
+                "type": "list",
+                "response_value": "myModels.result.leftNav",
+                "kind": "isObject"
+            }
+        ]
+    },
+    "navbar": {
+        "event_type": "click",
+        "event_method": "restCall",
+        "event_url": "data/data.json",
+        "url_variables": {
+            "reqid": "requestKey",
+            "xyz": "abc"
+        },
+        "request_type": "POST",
+        "request_model": "myModels.searchParam",
+        "response_model": "myModels.result",
+        "response_type": [
+            {
+                "type": "dropdown",
+                "response_value": "myModels.result.options",
+                "kind": "isArray"
+            },
+            {
+                "type": "list",
+                "response_value": "navlist",
+                "kind": "isArray"
+            }
+        ],
+        "fire_event": [
+            {
+                "type": "domManipulation",
+                "event": "changeColor",
+                "value": "red"
+            }
+        ]
+    }
+}
