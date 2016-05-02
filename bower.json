@@ -1,7 +1,7 @@
 {
-  "name": "cbTree",
-  "version": "0.0.0",
-  "description": "cbtree-ui-lib",
+  "name": "data-binding-js",
+  "version": "0.0.1",
+  "description": "dbjs-ui-lib",
   "moduleType": [
     "amd"
   ],

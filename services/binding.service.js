@@ -1,8 +1,8 @@
 "use strict";
-cbTree.handleEventService = (function(){	//Event Binding
-	var eventBind = function(eventName, that){
-		var element = $(that);
-		var currentEvent = cbTree.eventsJSON[eventName];
+databinding.handleEventService = (function(){	//Event Binding
+	var eventBind = function(eventName, elem){
+		var element = $(elem);
+		var currentEvent = databinding.eventsJSON[eventName];
 		if(currentEvent.event_type == 'click'){
 			element.on('click', function(){
 					eventTrigger(this, currentEvent);
@@ -16,16 +16,24 @@ cbTree.handleEventService = (function(){	//Event Binding
 	}
 	var eventTrigger  = function(that, currentEvent){
 		var element = $(that);
-		cbTree.ajaxService.ajaxCall(currentEvent.event_url);
-		var responseOfRestCall = cbTree.response;
-		cbTree.handleDataBindingService.dataBind(element, currentEvent, responseOfRestCall);
-	}
-	return{
-		eventBind : eventBind
-	}
-})();
+		var request = new Request('data/data.json', {
+		method: 'GET',
+		headers: new Headers({
+			'Content-Type': 'application/json'
+			})
+		});
+		fetch(request).then(function(response) {
+			return response.json();
+		}).then(function(j) {
+			databinding.handleDataBindingService.dataBind(element, currentEvent, j);
+		});
+		}
+		return{
+			eventBind : eventBind
+		}
+	})();
 
-cbTree.handleDataBindingService = (function(){ //Data-Binding
+databinding.handleDataBindingService = (function(){ //Data-Binding
 	var dataBind  = function(element, currentEvent, response){
 		if(currentEvent.response_type[1].type == 'list'){
 			for(var i in response[currentEvent.response_type[1].response_value]){
